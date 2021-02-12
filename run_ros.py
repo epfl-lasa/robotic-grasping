@@ -4,7 +4,7 @@ import os
 import numpy as np
 import torch.utils.data
 import rospy
-from sensor_msgs.msg import Image, RegionOfInterest
+from sensor_msgs.msg import Image
 from std_msgs.msg import Float64MultiArray, MultiArrayLayout, MultiArrayDimension
 from cv_bridge import CvBridge
 
@@ -30,14 +30,6 @@ class Global:
     depth = None
     rgb_ready = False
     depth_ready = False
-    publish_topics = [
-        "center_x",
-        "center_y",
-        "angle",
-        "quality",
-        "length",
-        "width",
-    ]
 
 
 def rgb_callback(data):
@@ -122,21 +114,5 @@ if __name__ == '__main__':
                     g.width,
                     g.quality,
                 ])
-
-            # for topic in Global.publish_topics:
-            #     if topic == "center_x":
-            #         pub_msgs.append(Float64MultiArray(
-            #             data=[g.center[0] for g in grasps]
-            #         ))
-            #     elif topic == "center_y":
-            #         pub_msgs.append(Float64MultiArray(
-            #             data=[g.center[1] for g in grasps]
-            #         ))
-            #     else:
-            #         pub_msgs.append(Float64MultiArray(
-            #             data=[getattr(g, topic) for g in grasps]
-            #         ))
-
-            # [publishers[i].publish(pub_msgs[i]) for i in range(len(Global.publish_topics))]
             publisher.publish(msg)
             rate.sleep()
