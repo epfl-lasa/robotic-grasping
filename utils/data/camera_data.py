@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from utils.dataset_processing import image
+from ..dataset_processing import image
 
 
 class CameraData:
@@ -55,8 +55,8 @@ class CameraData:
         rgb_img.crop(bottom_right=self.bottom_right, top_left=self.top_left)
         # rgb_img.resize((self.output_size, self.output_size))
         if norm:
-                rgb_img.normalise()
-                rgb_img.img = rgb_img.img.transpose((2, 0, 1))
+            rgb_img.normalise()
+            rgb_img.img = rgb_img.img.transpose((2, 0, 1))
         return rgb_img.img
 
     def get_data(self, rgb=None, depth=None):

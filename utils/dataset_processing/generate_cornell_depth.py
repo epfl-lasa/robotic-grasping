@@ -5,7 +5,7 @@ import os
 import numpy as np
 from imageio import imsave
 
-from utils.dataset_processing.image import DepthImage
+from ..dataset_processing.image import DepthImage
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate depth images from Cornell PCD files.')
