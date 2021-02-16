@@ -30,12 +30,23 @@ class Global:
 
 # ----- Callbacks -----
 def rgb_callback(data):
+    """Convert and save RGB Image
+
+    Args:
+        data (Image): RGB Image from ROS
+    """
     Global.rgb = Global.cvbridge.imgmsg_to_cv2(data, "passthrough")
     Global.rgb_ready = True
 
 
 def depth_callback(data):
+    """Convert and save Depth Image
+
+    Args:
+        data (Image): Depth Image from ROS
+    """
     if Global.sim_mode:
+        # In simulation, NaN can be recieved. So, `16UC1` encoding is needed.
         Global.depth = Global.cvbridge.imgmsg_to_cv2(data, "16UC1")
     else:
         Global.depth = Global.cvbridge.imgmsg_to_cv2(data, "passthrough")
